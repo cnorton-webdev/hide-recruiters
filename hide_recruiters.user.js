@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hide certain recruiting companies on Indeed and Dice
 // @namespace    cnorton-webdev
-// @version      0.1.0
+// @version      0.2.0
 // @homepage     https://github.com/cnorton-webdev
 // @description  Used to hide recruiting companies known to show "false" jobs, "hit and run" recruiting etc. on job board sites.
 // @author       Christopher Norton
@@ -59,11 +59,12 @@
        });
     }
 
-    // Check what site we are running on and run the correct function.
-    if (window.location.hostname == 'www.indeed.com' && window.location.pathname == '/jobs') {
-        hideIndeed();
-    } else if (window.location.hostname == 'www.dice.com' && window.location.pathname.includes('/jobs')) {
-        hideDice();
-    }
-
+    $(document).ready(function() {
+        // Check what site we are running on and run the correct function.
+        if (window.location.hostname == 'www.indeed.com' && window.location.pathname == '/jobs') {
+            hideIndeed();
+        } else if (window.location.hostname == 'www.dice.com' && window.location.pathname.includes('/jobs')) {
+            hideDice();
+        }
+    });
 })();
