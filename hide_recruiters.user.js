@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hide certain recruiting companies on Indeed and Dice
 // @namespace    cnorton-webdev
-// @version      0.2.0
+// @version      0.3.0
 // @homepage     https://github.com/cnorton-webdev
 // @description  Used to hide recruiting companies known to show "false" jobs, "hit and run" recruiting etc. on job board sites.
 // @author       Christopher Norton
@@ -35,8 +35,11 @@
                 $(this).hide();
             } else if($('.company > a', this).attr('href') == '/cmp/Officeteam') {
                 $(this).hide();
+                // End the Robert Half International name game, for now.
+            } else if($('.conpany > a', this).attr('href') == '/cmp/Cybercoders') {
+                // Welcome CyberCoders to the list of horrible recruiting companies!
+                $(this).hide();
             }
-            // End the Robert Half International name game, for now.
         });
     }
 
@@ -54,6 +57,9 @@
               $(this).hide();
           } else if($('span.hidden-xs > a', this).attr('href') == '/company/10105424') {
               // Teksystems, Inc.
+              $(this).hide();
+          } else if($('span.hidden-xs > a', this).attr('href') == '/company/cybercod') {
+              // Welcome CyberCoders to the list of horrible recruiting companies!
               $(this).hide();
           }
        });
