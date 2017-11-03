@@ -1,12 +1,13 @@
 // ==UserScript==
-// @name         Hide certain recruiting companies on Indeed and Dice
+// @name         hide_recruiters
 // @namespace    cnorton-webdev
-// @version      0.3.0
+// @version      0.4.0
 // @homepage     https://github.com/cnorton-webdev
 // @description  Used to hide recruiting companies known to show "false" jobs, "hit and run" recruiting etc. on job board sites.
 // @author       Christopher Norton
 // @match        *://www.indeed.com/*
 // @match        *://www.dice.com/*
+// @match        *://www.linkedin.com/*
 // @grant        none
 // @require      https://code.jquery.com/jquery-3.2.1.min.js
 // ==/UserScript==
@@ -65,12 +66,46 @@
        });
     }
 
+    function hideLinkedin() {
+        $('.job-card').each(function(){
+           if ($('.job-card__company-name',this).text() == 'Robert Half Technology' && $(this).is(":visible")) {
+               $(this).hide();
+           } else if ($('.job-card__company-name',this).text() == 'The Creative Group' && $(this).is(":visible")) {
+               $(this).hide();
+           } else if ($('.job-card__company-name',this).text() == 'RemX - Accounting & Finance Staffing' && $(this).is(":visible")) {
+               $(this).hide();
+           } else if ($('.job-card__company-name',this).text() == 'TEKsystems' && $(this).is(":visible")) {
+               $(this).hide();
+           } else if ($('.job-card__company-name',this).text() == 'CyberCoders' && $(this).is(":visible")) {
+               $(this).hide();
+           } else if ($('.job-card__company-name',this).text() == 'Accountemps' && $(this).is(":visible")) {
+               $(this).hide();
+           } else if ($('.job-card__company-name',this).text() == 'OfficeTeam' && $(this).is(":visible")) {
+               $(this).hide();
+           } else if ($('.job-card__company-name',this).text() == 'Robert Half Legal' && $(this).is(":visible")) {
+               $(this).hide();
+           } else if ($('.job-card__company-name',this).text() == 'Robert Half Finance & Accounting' && $(this).is(":visible")) {
+               $(this).hide();
+           } else if ($('.job-card__company-name',this).text() == 'Robert Half Management Resources' && $(this).is(":visible")) {
+               $(this).hide();
+           }
+        });
+    }
+
     $(document).ready(function() {
         // Check what site we are running on and run the correct function.
         if (window.location.hostname == 'www.indeed.com' && window.location.pathname == '/jobs') {
-            hideIndeed();
+            if ($('.clickcard').length) {
+                hideIndeed();
+            }
         } else if (window.location.hostname == 'www.dice.com' && window.location.pathname.includes('/jobs')) {
-            hideDice();
+            if ($('.complete-serp-result-div').length) {
+                hideDice();
+            }
+        } else if (window.location.hostname == 'www.linkedin.com' && window.location.pathname.includes('/jobs')) {
+            if ($('.job-card').length) {
+                setInterval(hideLinkedin,2000);
+            }
         }
     });
 })();
